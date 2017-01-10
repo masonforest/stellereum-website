@@ -1,0 +1,29 @@
+{
+  "name": "stellereum-website",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.4"
+  },
+  "dependencies": {
+    "material-ui": "^0.16.6",
+    "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-fontawesome": "^1.5.0",
+    "react-router": "^3.0.0",
+    "react-tap-event-plugin": "^2.0.1",
+    "reactstrap": "^4.0.0-alpha.8",
+    "stellar-sdk": "^0.6.2",
+    "web3": "^0.18.0"
+  },
+  "scripts": {
+    "start": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='ws://ethereum-testnet-websocket-api.herokuapp.com:80/' react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "REACT_APP_ETHEREUM_HOST='ws://ethereum-websocket-api.herokuapp.com:80/' npm run build && mv build/{index,200}.html && cp -R config/* build && surge -d stellereum.com build",
+    "deploy:test": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='ws://ethereum-testnet-websocket-api.herokuapp.com:80/' npm run build && mv build/{index,200}.html &&surge -d testnet.stellereum.com build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -1,0 +1,14 @@
+.App {
+  min-height: 400px;
+  padding-left: 340px;
+  padding-right: 40px;
+}
+
+
+a.address span{
+  display: inline-block;
+  width: 264px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

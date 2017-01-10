@@ -1,0 +1,14 @@
+FEDERATION_SERVER = "https://api.stellereum.com/federation"
+
+NODE_NAMES = [
+"GANKPOVQVDXAAERE2GTL5GLFMRGHOJYYGKO6V6GMYGB7N5CKXZPRDXAY issuer",
+]
+
+ACCOUNTS = [
+"$issuer"
+]
+
+[[CURRENCIES]]
+code="ETH"
+issuer="$issuer"
+display_decimals=2
