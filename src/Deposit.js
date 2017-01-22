@@ -2,26 +2,29 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import StellarSdk from 'stellar-sdk';
 import Web3 from 'web3';
+import TransactionList from './TransactionList';
 
 var web3;
 var contract;
 
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const CONTRACT_API =
-[{"constant":false,"inputs":[{"name":"accountId","type":"string"}],"name":"Pay","outputs":[],"payable":true,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountId","type":"string"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Payment","type":"event"}];
+[{"constant":false,"inputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"}],"name":"Withdrawl","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"accountId","type":"string"}],"name":"Deposit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountId","type":"string"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"DepositEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"WithdrawlEvent","type":"event"}]
 
 if (typeof window.web3 !== 'undefined') {
   web3 = new Web3(window.web3.currentProvider);
   web3.defaultAccount = web3.eth.accounts[0];
   var StelereumContract = web3.eth.contract(CONTRACT_API);
-  contract = StelereumContract.at(process.env.REACT_APP_CONTRACT_ADDRESS);
+  contract = StelereumContract.at(CONTRACT_ADDRESS);
 }
+
 
 export default class Deposit extends React.Component {
   constructor() {
     super();
     this.state = {
-      address: "masonforest*lobstr.co",
-      amount: ".01",
+      address: "",
+      amount: "",
       signing: false,
     };
     this.depositCallback = this.depositCallback.bind(this);
@@ -45,16 +48,25 @@ export default class Deposit extends React.Component {
   }
 
   pay(accountId, amount) {
-    contract.Pay(
-        accountId,
-        {
-          from: web3.eth.accounts[0],
-          value: web3.toWei(amount, 'ether'),
-        },
+    console.log(web3.eth.accounts[0])
+    console.log(accountId)
+    window.c = contract;
+
+    contract.Deposit(
+//        accountId,
+          "GAEJWM55L5QADJNAJTNQ54JVE2KKHLDAHZACPQRC4IFDI6IO55TN5XJY",
+      {
+        from: '0xe682d82f3e535975505211f9090ae029d799c39b',
+        value: web3.toWei('0.01', 'ether'),
+        // from: web3.eth.accounts[0],
+        // value: web3.toWei(amount, 'ether'),
+      },
         this.depositCallback)
+      console.log("after")
   }
 
   depositCallback (error, transactionHash) {
+    console.log(transactionHash);
     if(error) {
       console.log(error);
     } else {
@@ -74,22 +86,36 @@ export default class Deposit extends React.Component {
     this.setState({...this.state, amount: value})
   }
 
+  isMetamaskInstalled = () => {
+    return typeof window.web3 !== 'undefined'
+  }
+
+  renderInstallMetamask () {
+    return <div className="alert alert-warning text-center">No Ethereum Provider Found.
+      <br />Please install:<br />
+      <a href="https://metamask.io/">MetaMask</a><br />or <br /><a href="https://github.com/ethereum/mist/releases">Mist</a><br /></div>
+  }
+
   render() {
-    return <div>
-    <h2>Deposit Ether</h2>
-    <Form>
-      <fieldset disabled={this.state.signing}>
-        <FormGroup>
-          <Label for="address">Stellar Address</Label>
-          <Input onChange={this.handleAddressChange} type="address" name="address" id="address" value={this.state.address} placeholder="user@lobstr.co or GCEXAMPLE...."/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="amount">Amount in Ethers</Label>
-          <Input onChange={this.handleAmountChange} type="amount" name="amount" value={this.state.amount} id="amount"/>
-        </FormGroup>
-        <Button onClick={this.deposit}>Deposit{this.state.signing ? ' (Signing)' : null}</Button>
-      </fieldset>
-    </Form>
+    return <div className="card deposit">
+      <div className="card-block">
+        <h4 className="card-title">Deposit Ether</h4>
+        {this.isMetamaskInstalled() ?
+        <Form>
+          <fieldset disabled={this.state.signing && false}>
+            <FormGroup>
+              <Label for="address">Stellar Address</Label>
+              <Input onChange={this.handleAddressChange} type="address" name="address" id="address" value={this.state.address} placeholder="user@lobstr.co or GCEXAMPLE...."/>
+            </FormGroup>
+            <FormGroup>
+              <Label for="amount">Amount in Ethers</Label>
+              <Input onChange={this.handleAmountChange} type="amount" name="amount" value={this.state.amount} placeholder="0.00" id="amount"/>
+            </FormGroup>
+            <Button
+                color={this.state.signing ? "secondary" : "primary"} onClick={this.deposit}>Deposit{this.state.signing ? ' (Signing)' : null}</Button>
+          </fieldset>
+        </Form> : this.renderInstallMetamask()}
+      </div>
     </div>;
   }
 }

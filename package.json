@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-react": "^6.9.0",
     "react-scripts": "0.8.4"
   },
   "dependencies": {
     "material-ui": "^0.16.6",
+    "moment": "^2.17.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
@@ -19,10 +22,10 @@
     "web3": "^0.18.0"
   },
   "scripts": {
-    "start": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='ws://ethereum-testnet-websocket-api.herokuapp.com:80/' react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "REACT_APP_ETHEREUM_HOST='ws://ethereum-websocket-api.herokuapp.com:80/' npm run build && mv build/{index,200}.html && cp -R config/* build && surge -d stellereum.com build",
-    "deploy:test": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='ws://ethereum-testnet-websocket-api.herokuapp.com:80/' npm run build && mv build/{index,200}.html &&surge -d testnet.stellereum.com build",
+    "start": "REACT_APP_CONTRACT_ADDRESS=0x1fa5314c4807a164d938791f5d2fa87d320f6418 REACT_APP_ETHEREUM_HOST='ws://ethereum-websocket-api.herokuapp.com:80/' react-scripts start",
+    "build": "react-scripts build && cp -R config/.well-known build && cp _* build",
+    "deploy": "REACT_APP_ETHEREUM_HOST='wss://ethereum-websocket-api.herokuapp.com:80/' npm run build && cp -R config/.well-known build && surge -d stellereum.com build",
+    "deploy:test": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='wss://ethereum-testnet-websocket-api.herokuapp.com:80/' npm run build && surge -d testnet.stellereum.com build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

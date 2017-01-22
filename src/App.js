@@ -6,11 +6,12 @@ import I from 'react-fontawesome';
 
 import './App.css';
 
-const CONTRACT_ADDRESS = '0xc05b7a1c47123c840e0a71e33d464e34c1220181';
+const CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const CONTRACT_API =
-[{"constant":false,"inputs":[{"name":"accountId","type":"string"}],"name":"Pay","outputs":[],"payable":true,"type":"function"},{"inputs":[],"payable":false,"type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountId","type":"string"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Payment","type":"event"}];
+[{"constant":false,"inputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"}],"name":"Withdrawl","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"accountId","type":"string"}],"name":"Deposit","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"accountId","type":"string"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"DepositEvent","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"WithdrawlEvent","type":"event"}]
 var websocket = new WebSocket(process.env.REACT_APP_ETHEREUM_HOST, 'ethereum');
 websocket.onopen = function(evt) {
+  console.log(evt)
   websocket.send(JSON.stringify({
     event: "subscribe",
     address: CONTRACT_ADDRESS,
@@ -47,12 +48,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-      <Navbar />
-      <div className="container">
-        <div>
-        {this.props.children}
+        <Navbar />
+        <div className="container">
+          <div>
+            {this.props.children}
+          </div>
         </div>
-      </div>
       </div>
     );
   }

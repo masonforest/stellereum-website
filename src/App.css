@@ -5,9 +5,27 @@
 }
 
 
-a.address span{
+a.address {
+  display: flex;
+  align-items: center;
+}
+
+.deposit .btn {
+  float: right;
+}
+
+.amount {
+  width: 100px;
+  text-align: right;
+}
+
+.row {
+  margin-top: 35px;
+}
+
+a.address span {
   display: inline-block;
-  width: 264px;
+  width: 200px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

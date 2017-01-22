@@ -1,7 +1,7 @@
-FEDERATION_SERVER = "https://api.stellereum.com/federation"
+FEDERATION_SERVER = "https://stellereum-bridge.herokuapp.com/federation"
 
 NODE_NAMES = [
-"GANKPOVQVDXAAERE2GTL5GLFMRGHOJYYGKO6V6GMYGB7N5CKXZPRDXAY issuer",
+"GDIR44J6EE3SVP4OAOAF7FAJGBXIHELRKHGC3RFAYXDE4I73S6ZNNW2F issuer",
 ]
 
 ACCOUNTS = [
@@ -11,4 +11,4 @@ ACCOUNTS = [
 [[CURRENCIES]]
 code="ETH"
 issuer="$issuer"
-display_decimals=2
+display_decimals=18

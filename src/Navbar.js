@@ -10,17 +10,17 @@ export default class Example extends React.Component {
         <Navbar color="faded" light>
           <div className="container">
             <NavbarBrand href="/">Stellereum</NavbarBrand>
-            <Nav style={{float: 'right'}} navbar>
-              <NavItem>
-                <Link className="nav-link" to="/transactions">Transaction List</Link>
-              </NavItem>
-              <NavItem>
-                <Link className="nav-link" to="">Deposit</Link>
-              </NavItem>
-            </Nav>
           </div>
         </Navbar>
       </div>
     );
   }
+            // <Nav style={{float: 'right'}} navbar>
+            //   <NavItem>
+            //     <Link className="nav-link" to="">Deposit</Link>
+            //   </NavItem>
+            //   <NavItem>
+            //     <Link className="nav-link" to="/transactions">Transaction List</Link>
+            //   </NavItem>
+            // </Nav>
 }
