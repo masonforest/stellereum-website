@@ -49,25 +49,16 @@ export default class Deposit extends React.Component {
   }
 
   pay(accountId, amount) {
-    console.log(web3.eth.accounts[0])
-    console.log(accountId)
-    window.c = contract;
-
     contract.Deposit(
-//        accountId,
-          "GAEJWM55L5QADJNAJTNQ54JVE2KKHLDAHZACPQRC4IFDI6IO55TN5XJY",
+       accountId,
       {
-        from: '0xe682d82f3e535975505211f9090ae029d799c39b',
-        value: web3.toWei('0.01', 'ether'),
-        // from: web3.eth.accounts[0],
-        // value: web3.toWei(amount, 'ether'),
+        from: web3.eth.accounts[0],
+        value: web3.toWei(amount, 'ether'),
       },
         this.depositCallback)
-      console.log("after")
   }
 
   depositCallback (error, transactionHash) {
-    console.log(transactionHash);
     if(error) {
       console.log(error);
     } else {
@@ -103,7 +94,7 @@ export default class Deposit extends React.Component {
         <h4 className="card-title">Deposit Ether</h4>
         {this.isMetamaskInstalled() ?
         <Form>
-          <fieldset disabled={this.state.signing && false}>
+          <fieldset disabled={this.state.signing}>
             <FormGroup>
               <Label for="address">Stellar Address</Label>
               <Input onChange={this.handleAddressChange} type="address" name="address" id="address" value={this.state.address} placeholder="user@lobstr.co or GCEXAMPLE...."/>

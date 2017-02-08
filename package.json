@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "REACT_APP_CONTRACT_ADDRESS=0x1fa5314c4807a164d938791f5d2fa87d320f6418 REACT_APP_ETHEREUM_HOST='ws://ethereum-websocket-api.herokuapp.com:80/' react-scripts start",
-    "build": "react-scripts build && cp -R config/.well-known build && cp _* build",
+    "build": "REACT_APP_ETHEREUM_HOST=ws://ethereum-websocket-api.herokuapp.com:80/ REACT_APP_CONTRACT_ADDRESS=0x1fa5314c4807a164d938791f5D2fa87d320F6418 react-scripts build && cp -R config/.well-known build && cp _* build",
     "deploy": "REACT_APP_ETHEREUM_HOST='wss://ethereum-websocket-api.herokuapp.com:80/' npm run build && cp -R config/.well-known build && surge -d stellereum.com build",
     "deploy:test": "REACT_APP_CONTRACT_ADDRESS=0xc05b7a1c47123c840e0a71e33d464e34c1220181 REACT_APP_ETHEREUM_HOST='wss://ethereum-testnet-websocket-api.herokuapp.com:80/' npm run build && surge -d testnet.stellereum.com build",
     "test": "react-scripts test --env=jsdom",

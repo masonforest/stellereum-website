@@ -1,5 +1,6 @@
 import React from 'react';
 import Deposit from './Deposit';
+import TransactionList from './TransactionList';
 
 export default class Example extends React.Component {
   render() {
@@ -21,6 +22,7 @@ export default class Example extends React.Component {
       </div>
       <div className="row">
         <div className="col-12">
+          <TransactionList />
         </div>
       </div>
     </div>;
