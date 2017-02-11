@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import StellarSdk from 'stellar-sdk';
 import Web3 from 'web3';
-import TransactionList from './TransactionList';
 
 var web3;
 var contract;
@@ -93,20 +92,20 @@ export default class Deposit extends React.Component {
       <div className="card-block">
         <h4 className="card-title">Deposit Ether</h4>
         {this.isMetamaskInstalled() ?
-        <Form>
-          <fieldset disabled={this.state.signing}>
-            <FormGroup>
-              <Label for="address">Stellar Address</Label>
-              <Input onChange={this.handleAddressChange} type="address" name="address" id="address" value={this.state.address} placeholder="user@lobstr.co or GCEXAMPLE...."/>
-            </FormGroup>
-            <FormGroup>
-              <Label for="amount">Amount in Ethers</Label>
-              <Input onChange={this.handleAmountChange} type="amount" name="amount" value={this.state.amount} placeholder="0.00" id="amount"/>
-            </FormGroup>
-            <Button
+          <Form>
+            <fieldset disabled={this.state.signing}>
+              <FormGroup>
+                <Label for="address">Stellar Address</Label>
+                <Input onChange={this.handleAddressChange} type="address" name="address" id="address" value={this.state.address} placeholder="user@lobstr.co or GCEXAMPLE...."/>
+              </FormGroup>
+              <FormGroup>
+                <Label for="amount">Amount in Ethers</Label>
+                <Input onChange={this.handleAmountChange} type="amount" name="amount" value={this.state.amount} placeholder="0.00" id="amount"/>
+              </FormGroup>
+              <Button
                 color={this.state.signing ? "secondary" : "primary"} onClick={this.deposit}>Deposit{this.state.signing ? ' (Signing)' : null}</Button>
-          </fieldset>
-        </Form> : this.renderInstallMetamask()}
+            </fieldset>
+          </Form> : this.renderInstallMetamask()}
       </div>
     </div>;
   }

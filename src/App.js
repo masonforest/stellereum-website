@@ -25,21 +25,21 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       open: true,
-      transactions: [],
+      deposits: [],
     };
-    websocket.onmessage = (message) => {
-      const {event, data} = JSON.parse(message.data)
-      if(event === 'event') {
-        this.receiveTransaction(data);
-      }
-    }
+    // websocket.onmessage = (message) => {
+    //   const {event, data} = JSON.parse(message.data)
+    //   if(event === 'event') {
+    //     this.receiveTransaction(data);
+    //   }
+    // }
 
     this.receiveTransaction =  this.receiveTransaction.bind(this);
   }
 
-  receiveTransaction(transaction) {
+  receiveTransaction(deposit) {
     this.setState({
-      transactions:[transaction, ...this.state.transactions]
+      deposits:[deposit, ...this.state.desposits]
     })
   }
 
