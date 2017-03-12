@@ -80,6 +80,7 @@ export default class Example extends React.Component {
             </div>
             <div className="card-block">
               <p>Stellereum is a bridge between the <a href="https://www.stellar.org/">Stellar</a> and <a href="https://ethereum.org/">Ethereum</a> networks. Use the deposit form to deposit Ether. To withdrawl send tokens to &lt;your ethereum address&gt;*stellereum.com.</p>
+            <p>If you would like transact Ether manually you can call the <strong>Deposit</strong> and <strong>Withdrawl</strong> methods directly on the contract deployed at <a href="https://etherscan.io/address/0x1fa5314c4807a164d938791f5d2fa87d320f6418">0x1fa5314c4807a164d938791f5d2fa87d320f6418</a>. Stellereum was built by <a target="_blank" href="https://github.com/masonforest/">@masonforest</a> who works full time at <a target="_blank" href="http://www.thoughtbot.com/">thoughtbot</a>.</p>
             </div>
           </div>
         </div>
